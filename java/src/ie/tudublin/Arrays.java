@@ -8,7 +8,9 @@ public class Arrays extends PApplet
 {
 	String[] months = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
 
-	float[] rainfall = {200, 260, 300, 150, 100, 50, 10, 40, 67, 160, 400, 420};
+	float[] rainfall = {200, 260, 200, 150, 100, 50, 20, 40, 67, 160, 100, 120};
+
+	int mode = 0;
 
 	public float map1(float a, float b, float c, float d, float e)
 	{
@@ -19,19 +21,19 @@ public class Arrays extends PApplet
 		return d + (howFar / r1) * r2;
 	}
 
-	void randomize()
+	/*void randomize()
 	{
 		for (int i = 0; i < rainfall.length; i++) {
-			rainfall[i] = random(500);
+			rainfall[i] = rainfall[i];
 		}
-	}
+	}*/
 
 	public void settings()
 	{
 		size(500, 500);
 
 		String[] m1 = months;
-		months[0] = "XXX";
+		//months[0] = "JAN";
 		print(m1[0]);
 		for(int i = 0; i < months.length; i ++)
 		{
@@ -85,23 +87,49 @@ public class Arrays extends PApplet
 	}
 
 	public void setup() {
-		colorMode(HSB);
+		colorMode(HSB, 360, 100, 100);
 		background(0);
-		randomize();
-		
-		
+		//randomize();
 	}
+
 
 	
 	public void draw()
-	{	
+	{
 
 		background(0);
 		float w = width / (float)months.length;
+
+		//x-axis
+		stroke(255);
+		line(50, height - 50, width - 50, height - 50);
+		
+		//y-axis
+		line(50, height - 50, 50, 50);
+
+		//y-axis text
+		textAlign(RIGHT, CENTER);
+		for(int i = (int) 0; i <= 450; i += 50)
+		{
+			float y = map1(i, 0, 450, height - 50, 50);
+			line(50, y, 55, y);
+			text(i, 45, y);
+		}
+
+		textAlign(CENTER, CENTER);
+
 		for(int i = 0 ; i < months.length ;  i ++)
 		{
-			float x = map1(i, 0, months.length, 0, width);
-			rect(x, height, w, -rainfall[i]);
+			float x = map1(i, 0, months.length - 1, 50, width - 50);
+			line(x, height - 50, x, height - 45);
+
+			fill(map(i,0,months.length - 1, 0, 255), 255, 255);
+
+			rect(x, height - 50, w-5, -map1(rainfall[i], 0, 500, 0, height - 50));
+			fill(255);
+
+			text(months[i], x + w / 2, height - 30);
 		}
+
 	}
 }
