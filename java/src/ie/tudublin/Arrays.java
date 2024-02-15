@@ -8,7 +8,7 @@ public class Arrays extends PApplet
 {
 	String[] months = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
 
-	float[] rainfall = {200, 260, 200, 150, 100, 50, 20, 40, 67, 160, 100, 120};
+	float[] rainfall = {200, 250, 200, 150, 100, 50, 20, 40, 67, 160, 100, 120};
 
 	int mode = 0;
 
@@ -91,8 +91,6 @@ public class Arrays extends PApplet
 		background(0);
 		//randomize();
 	}
-
-
 	
 	public void draw()
 	{
@@ -118,16 +116,29 @@ public class Arrays extends PApplet
 
 		textAlign(CENTER, CENTER);
 
-		for(int i = 0 ; i < months.length ;  i ++)
+
+		for(int i = 1 ; i < months.length ;  i ++)
 		{
 			float x = map1(i, 0, months.length - 1, 50, width - 50);
 			line(x, height - 50, x, height - 45);
 
-			fill(map(i,0,months.length - 1, 0, 255), 255, 255);
+		// 	fill(map(i,0,months.length - 1, 0, 255), 255, 255);
+		
+			{
+			// code for a scatter plot trend line
+				float y = map1(rainfall[i], 0, 450, height - 50, 50);
+				float y2 = map1(rainfall[i-1], 0, 450, height - 50, 50);
+				line(x, y, x, y2);
+				ellipse(x, y, 2, 2);
+			}	
 
-			rect(x, height - 50, w-5, -map1(rainfall[i], 0, 500, 0, height - 50));
+		
+
+		//  bar chart rectangles
+		//	rect(x, height - 50, w-5, -map1(rainfall[i], 0, 500, 0, height - 50));
 			fill(255);
-
+			
+			// Text for the months
 			text(months[i], x + w / 2, height - 30);
 		}
 
