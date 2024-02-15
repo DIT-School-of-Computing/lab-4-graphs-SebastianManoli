@@ -33,7 +33,7 @@ public class Arrays extends PApplet
 		size(500, 500);
 
 		String[] m1 = months;
-		//months[0] = "JAN";
+		months[0] = "JAN";
 		print(m1[0]);
 		for(int i = 0; i < months.length; i ++)
 		{
@@ -128,7 +128,8 @@ public class Arrays extends PApplet
 			// code for a scatter plot trend line
 				float y = map1(rainfall[i], 0, 450, height - 50, 50);
 				float y2 = map1(rainfall[i-1], 0, 450, height - 50, 50);
-				line(x, y, x, y2);
+				float x2 = map1(i-1, 0, months.length - 1, 50, width);
+				line(x, y, x2, y2);
 				ellipse(x, y, 2, 2);
 			}	
 
@@ -138,9 +139,12 @@ public class Arrays extends PApplet
 		//	rect(x, height - 50, w-5, -map1(rainfall[i], 0, 500, 0, height - 50));
 			fill(255);
 			
-			// Text for the months
-			text(months[i], x + w / 2, height - 30);
+			// Text for the months		
+			text(months[i], (x + w / 2) - 25, height - 30);
 		}
+		// Text for the january 
+		text(months[0], 50, height - 30);
+		
 
 	}
 }
