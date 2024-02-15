@@ -131,6 +131,15 @@ public class Arrays extends PApplet
 			float angle = map(rainfall[i], 0, sum, 0, TWO_PI);
 			fill(map(i, 0, months.length - 1, 0, 255), 255, 255);
 			arc(width / 2, height / 2, 200, 200, lastAngle, lastAngle + angle);
+
+			// label position
+			float labelAngle = lastAngle + angle / 2;
+			float labelX = (width / 2 + cos(labelAngle) * 100); // Adjust radius for label position
+			float labelY = (height / 2 + sin(labelAngle) * 100); // Adjust radius for label position
+	
+			// label text
+			fill(255);
+			text(months[i], labelX-10, labelY);
 			
 			lastAngle += angle;
 
