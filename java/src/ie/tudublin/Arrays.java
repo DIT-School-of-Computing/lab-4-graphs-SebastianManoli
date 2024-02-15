@@ -8,7 +8,7 @@ public class Arrays extends PApplet
 {
 	String[] months = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
 
-	float[] rainfall = {200, 250, 200, 150, 100, 50, 20, 40, 67, 160, 100, 120};
+	float[] rainfall = {200, 250, 200, 150, 100, 50, 300, 40, 67, 160, 100, 120};
 
 	int mode = 0;
 
@@ -98,51 +98,67 @@ public class Arrays extends PApplet
 		background(0);
 		float w = width / (float)months.length;
 
-		//x-axis
-		stroke(255);
-		line(50, height - 50, width - 50, height - 50);
+		// //x-axis
+		// stroke(255);
+		// line(50, height - 50, width - 50, height - 50);
 		
-		//y-axis
-		line(50, height - 50, 50, 50);
+		// //y-axis
+		// line(50, height - 50, 50, 50);
 
-		//y-axis text
-		textAlign(RIGHT, CENTER);
-		for(int i = (int) 0; i <= 450; i += 50)
+		// //y-axis text
+		// textAlign(RIGHT, CENTER);
+		// for(int i = (int) 0; i <= 450; i += 50)
+		// {
+		// 	float y = map1(i, 0, 450, height - 50, 50);
+		// 	line(50, y, 55, y);
+		// 	text(i, 45, y);
+		// }
+
+		// textAlign(CENTER, CENTER);
+		
+		float sum = 0;
+		for(float f : rainfall)
 		{
-			float y = map1(i, 0, 450, height - 50, 50);
-			line(50, y, 55, y);
-			text(i, 45, y);
+			sum += f;
 		}
+		float lastAngle = 0;
 
-		textAlign(CENTER, CENTER);
-
-
-		for(int i = 1 ; i < months.length ;  i ++)
+		for(int i = 0 ; i < months.length ;  i ++)
 		{
-			float x = map1(i, 0, months.length - 1, 50, width - 50);
-			line(x, height - 50, x, height - 45);
+			// float x = map1(i, 0, months.length - 1, 50, width - 50);
+			// line(x, height - 50, x, height - 45);
 
-		// 	fill(map(i,0,months.length - 1, 0, 255), 255, 255);
-		
-			{
-			// code for a scatter plot trend line
-				float y = map1(rainfall[i], 0, 450, height - 50, 50);
-				float y2 = map1(rainfall[i-1], 0, 450, height - 50, 50);
-				float x2 = map1(i-1, 0, months.length - 1, 50, width - 50);
-				line(x, y, x2, y2);
-			}	
+			float angle = map(rainfall[i], 0, sum, 0, TWO_PI);
+			fill(map(i, 0, months.length - 1, 0, 255), 255, 255);
+			arc(width / 2, height / 2, 200, 200, lastAngle, lastAngle + angle);
+			
+			lastAngle += angle;
+
+
 
 		
+			// {
+			// // code for a scatter plot trend line
+			// 	float y = map1(rainfall[i], 0, 450, height - 50, 50);
+			// 	float y2 = map1(rainfall[i-1], 0, 450, height - 50, 50);
+			// 	float x2 = map1(i-1, 0, months.length - 1, 50, width - 50);
+			// 	line(x, y, x2, y2);
+			// }	
+
+		
+
+
+
 
 		//  bar chart rectangles
 		//	rect(x, height - 50, w-5, -map1(rainfall[i], 0, 500, 0, height - 50));
-			fill(255);
+			// fill(255);
 			
 			// Text for the months		
-			text(months[i], (x + w / 2) - 25, height - 30);
+			// text(months[i], (x + w / 2) - 25, height - 30);
 		}
 		// Text for the january 
-		text(months[0], 50, height - 30);
+		// text(months[0], 50, height - 30);
 		
 
 	}
