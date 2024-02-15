@@ -128,9 +128,8 @@ public class Arrays extends PApplet
 			// code for a scatter plot trend line
 				float y = map1(rainfall[i], 0, 450, height - 50, 50);
 				float y2 = map1(rainfall[i-1], 0, 450, height - 50, 50);
-				float x2 = map1(i-1, 0, months.length - 1, 50, width);
+				float x2 = map1(i-1, 0, months.length - 1, 50, width - 50);
 				line(x, y, x2, y2);
-				ellipse(x, y, 2, 2);
 			}	
 
 		
